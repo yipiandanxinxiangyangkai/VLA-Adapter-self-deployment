@@ -4,9 +4,7 @@
 
 ```bash
 # Create and activate conda environment
-
 conda create -n vla-adapter python=3.10 -y
-
 conda activate vla-adapter
 ```
 
@@ -16,15 +14,11 @@ conda activate vla-adapter
 
 ```bash
 # 安装 PyTorch
-
 pip install torch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0
 
 #pip install to download dependencies
-
 git clone https://github.com/OpenHelix-Team/VLA-Adapter.git
-
 cd VLA-Adapter-main
-
 pip install -e .
 ```
 
@@ -32,9 +26,7 @@ pip install -e .
 
 ```bash
 pip install packaging ninja
-
 ninja --version; echo $?
-
 pip install flash-attn==2.5.5 --no-build-isolation --no-cache-dir -U
 ```
 如果直接执行上面的命令一直卡在Building wheel for flash-attn(setup.py)|，可以尝试如下方法解决
@@ -56,15 +48,10 @@ pip install flash_attn-2.5.5+cu122torch2.2cxx11abiTRUE-cp310-cp310-linux_x86_64.
 
 ```bash
 git clone https://github.com/Lifelong-Robot-Learning/LIBERO.git
-
 cd LIBERO
-
 pip install -e .
-
 pip install -r requirements.txt
-
 cd ..
-
 pip install -r experiments/robot/libero/libero_requirements.txt
 ```
 
@@ -76,13 +63,10 @@ cd ~/VLA-Adapter-main
 source /etc/network_turbo
 
 #方式一：采用git命令下载
-
 git clone https://hf-mirror.com/datasets/openvla/modified_libero_rlds
 
 #方式二：采用Huggingface镜像下载
-
 export HF_ENDPOINT=https://hf-mirror.com
-
 huggingface-cli download openvla/modified_libero_rlds --local-dir data/
 ```
 
@@ -90,7 +74,6 @@ huggingface-cli download openvla/modified_libero_rlds --local-dir data/
 
 ```bash
 apt-get update
-
 apt-get install libgl1-mesa-dev libegl1-mesa-dev libgles2-mesa-dev libglew-dev
 ```
 
@@ -101,18 +84,14 @@ prism-qwen25-extra-dinosiglip-224px-0_5b 是由 Stanford ILIAD 实验室（OpenV
 
 ```bash
 ├── pretrained_models
-
 · ├── configs
-
 └── prism-qwen25-extra-dinosiglip-224px-0_5b
 ```
 下载模型的命令如下
 
 ```bash
 #使用hf镜像下载prism-qwen25-extra-dinosiglip-224px-0_5b模型到pretrained_models/prism-qwen25-extra-dinosiglip-224px-0_5b文件夹
-
 export HF_ENDPOINT=https://hf-mirror.com
-
 huggingface-cli download --resume-download Stanford-ILIAD/prism-qwen25-extra-dinosiglip-224px-0_5b --local-dir /root/autodl-tmp/pretrained_models/prism-qwen25-extra-dinosiglip-224px-0_5b
 ```
 
@@ -122,7 +101,6 @@ huggingface-cli download --resume-download Stanford-ILIAD/prism-qwen25-extra-din
 
 ```bash
 PYTHONPATH=. CUDA_VISIBLE_DEVICES=0 torchrun --standalone --nnodes 1 --nproc-per-node 1 /root/VLA-Adapter-main/vla-scripts/finetune.py \\
-
 \--vlm_path pretrained_models/prism-qwen25-extra-dinosiglip-224px-0_5b \\
 \--config_file_path pretrained_models/configs \\
 \--data_root_dir data \\
